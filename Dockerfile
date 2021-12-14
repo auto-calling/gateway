@@ -19,4 +19,4 @@ RUN apk --no-cache add gcc tzdata \
     && echo "Asia/Ho_Chi_Minh" >  /etc/timezone
 COPY --from=builder /go/src/auto-calling/auto-calling-gateway .
 RUN rm -rf .git && rm -rf ci
-CMD [ "/app/run.sh" ]
+CMD [ "/app/service" ]

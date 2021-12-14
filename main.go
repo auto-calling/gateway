@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
 	"time"
@@ -22,7 +21,7 @@ func main() {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
 	if err := DB.Connect(ctx); err != nil {
-		log.Error(err.Error())
+		logrus.Error(err.Error())
 	}
 	defer DB.Disconnect(ctx)
 
@@ -38,6 +37,6 @@ func main() {
 	router.POST("/api/v1/make/event", handler.MakeEvent)
 
 	if err := router.Run(":80"); err != nil {
-		log.Error(err.Error())
+		logrus.Error(err.Error())
 	}
 }
