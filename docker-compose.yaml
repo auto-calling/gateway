@@ -1,0 +1,58 @@
+version: "3.3"
+services:
+  gateway:
+    build: .
+    container_name: auto-calling-gateway
+    restart: always
+    environment:
+      - AUTO_CALLING_COLLECTION=logging
+      - GIN_MODE=info
+      - KAFKA_BROKER_LIST=localhost:9092
+      - KAFKA_GROUP_CONSUMER=auto-calling
+      - KAFKA_TOPIC=auto-calling
+      - MONGODB_MAX_POOL_SIZE=128
+      - MONGODB_MIN_POOL_SIZE=5
+      - MONGO_DBNAME=auto-calling
+      - MONGO_URI=mongodb://root:example@mongo:27017/?authSource=auto-calling&authMechanism=SCRAM-SHA-1
+      - TIME_OUT=5s
+      - TOKEN=Bearer change_me"
+    network_mode: host
+    depends_on:
+      - kafka
+      - mongo
+      - zoo
+  mongo:
+    image: mongo:4.4.9
+    restart: always
+    network_mode: host
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+  zoo:
+    image: confluentinc/cp-zookeeper:6.2.1
+    hostname: zoo
+    container_name: zoo
+    network_mode: host
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_SERVER_ID: 1
+      ZOOKEEPER_SERVERS: zoo:2888:3888
+  kafka:
+    image: confluentinc/cp-kafka:6.2.1
+    hostname: kafka
+    user: "appuser:appuser"
+    network_mode: host
+    environment:
+      KAFKA_ADVERTISED_LISTENERS: LISTENER_DOCKER_INTERNAL://kafka:19092,LISTENER_DOCKER_EXTERNAL://${DOCKER_HOST_IP:-127.0.0.1}:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: LISTENER_DOCKER_INTERNAL:PLAINTEXT,LISTENER_DOCKER_EXTERNAL:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: LISTENER_DOCKER_INTERNAL
+      KAFKA_ZOOKEEPER_CONNECT: "zoo:2181"
+      KAFKA_BROKER_ID: 1
+      KAFKA_LOG4J_LOGGERS: "kafka.controller=INFO,kafka.producer.async.DefaultEventHandler=INFO,state.change.logger=INFO"
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_JMX_PORT: 9999
+      KAFKA_JMX_HOSTNAME: ${DOCKER_HOST_IP:-127.0.0.1}
+    depends_on:
+      - zoo
