@@ -4,7 +4,7 @@
     - [Building the Docker image](#building-the-docker-image)
   - [Running](#running)
   - [How to work](#how-to-work)
-  - [Thiết kế API](#thiết-kế-api)
+  - [API structure](#api-structure)
   - [Message send to queue kafka](#message-send-to-queue-kafka)
 
 # Atuo-calling-gateway
@@ -41,7 +41,7 @@ export KAFKA_GROUP_CONSUMER="auto-calling"
 export MONGO_DBNAME="auto-calling"
 ```
 
-## Thiết kế API
+## API structure
 - API receive request https://{DOMAIN}/api/v1/make/event
 ```shell
 curl --location --request POST 'https://{DOMAIN}/api/v1/make/event' \
