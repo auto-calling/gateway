@@ -12,11 +12,8 @@ RUN apk --no-cache add tzdata
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 WORKDIR /app
-ADD ./ci/run.sh /app/run.sh
 RUN apk --no-cache add gcc tzdata \
-    && chmod 755 /app/run.sh \
     && cp /usr/share/zoneinfo/Asia/Ho_Chi_Minh /etc/localtime \
     && echo "Asia/Ho_Chi_Minh" >  /etc/timezone
 COPY --from=builder /go/src/auto-calling/auto-calling-gateway .
-RUN rm -rf .git && rm -rf ci
 CMD [ "/app/service" ]
