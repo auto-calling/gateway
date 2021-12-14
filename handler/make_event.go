@@ -64,8 +64,7 @@ func MakeEvent(c *gin.Context) {
 	// Write to mongodb
 	idLogging, err := models.LoggingInsertOne(logging)
 	if err != nil {
-		sentry.CaptureMessage(err.Error())
-		sentry.Flush(time.Second * 5)
+		logrus.Error("Can't connection to mongodb")
 		RespondWithError(c, http.StatusBadRequest, err)
 		return
 	}

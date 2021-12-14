@@ -25,14 +25,14 @@ func JSONLogMiddleware() gin.HandlerFunc {
 		c.Next()
 
 		entry := log.WithFields(log.Fields{
-			"src_ip":    c.Request.RemoteAddr,
-			"duration":  GetDurationInMillSeconds(start),
-			"method":    c.Request.Method,
-			"path":      c.Request.RequestURI,
-			"status":    c.Writer.Status(),
-			"referrer":  c.Request.Referer(),
-			"client_ip": c.Request.Header.Get("client-ip"),
-			"protocol": c.Request.Proto,
+			"src_ip":     c.Request.RemoteAddr,
+			"duration":   GetDurationInMillSeconds(start),
+			"method":     c.Request.Method,
+			"path":       c.Request.RequestURI,
+			"status":     c.Writer.Status(),
+			"referrer":   c.Request.Referer(),
+			"client_ip":  c.Request.Header.Get("client-ip"),
+			"protocol":   c.Request.Proto,
 			"user-agent": c.Request.UserAgent(),
 		})
 
