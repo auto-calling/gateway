@@ -2,6 +2,7 @@ package handler
 
 import (
 	"github.com/auto-calling/gateway/config"
+	"github.com/sirupsen/logrus"
 	"gopkg.in/confluentinc/confluent-kafka-go.v1/kafka"
 	"log"
 )
