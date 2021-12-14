@@ -4,7 +4,6 @@ import (
 	"github.com/auto-calling/gateway/config"
 	"github.com/sirupsen/logrus"
 	"gopkg.in/confluentinc/confluent-kafka-go.v1/kafka"
-	"log"
 )
 
 func Producer(msg []byte) error {
@@ -20,7 +19,7 @@ func Producer(msg []byte) error {
 			switch ev := e.(type) {
 			case *kafka.Message:
 				if ev.TopicPartition.Error != nil {
-					log.Error("Delivery failed: %v\n", ev.TopicPartition)
+					logrus.Error("Delivery failed: %v\n", ev.TopicPartition)
 				}
 			}
 		}
