@@ -12,6 +12,8 @@
 ## Feature overview
 Gateway receive API request from Nagios, Alert-manager, send message to kafka and insert data to MongoDB
 
+![image](image/gateway.png)
+
 ## Building
 ### Building the Docker image
 ```
