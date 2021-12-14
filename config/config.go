@@ -35,7 +35,6 @@ func ConnectionDB() (*mongo.Client, error) {
 	DB, err = mongo.NewClient(options)
 	if err != nil {
 		logrus.Error("Can't connection to mongodb")
-		sentry.CaptureMessage(err.Error())
 		return nil, err
 	}
 
