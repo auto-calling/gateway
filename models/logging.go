@@ -1,11 +1,11 @@
 package models
 
 import (
-	"github.com/auto-calling/gateway/config"
-	"time"
-
 	"context"
+	"github.com/auto-calling/gateway/config"
+	log "github.com/sirupsen/logrus"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"time"
 )
 
 type Logging struct {
