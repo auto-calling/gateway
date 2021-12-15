@@ -32,7 +32,7 @@ docker-compose up -d
 ```shell
 export GIN_MODE="debug"
 export TOKEN="Bearer change_me"
-export MONGO_URI="mongodb://root:example@mongo:27017/?authSource=auto-calling&authMechanism=SCRAM-SHA-1"
+export MONGO_URI="mongodb://root:example@mongo:27017/?authMechanism=SCRAM-SHA-1"
 export AUTO_CALLING_COLLECTION="logging"
 export TIME_OUT="5s"
 export MONGODB_MAX_POOL_SIZE=128
