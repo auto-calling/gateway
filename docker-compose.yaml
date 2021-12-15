@@ -16,12 +16,12 @@ services:
       MONGO_URI: "mongodb://root:example@mongo:27017/?authSource:auto-calling&authMechanism:SCRAM-SHA-1"
       TIME_OUT: 5s
       TOKEN: "Bearer change_me"
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost"]
-      interval: 1m30s
-      timeout: 5s
-      retries: 3
-      start_period: 20s
+    # healthcheck:
+    #   test: ["CMD", "curl", "http://localhost/apiv1/ping"]
+    #   interval: 1m30s
+    #   timeout: 5s
+    #   retries: 3
+    #   start_period: 20s
     network_mode: host
     depends_on:
       - kafka
