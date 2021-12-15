@@ -54,7 +54,7 @@ curl --location --request POST 'https://{DOMAIN}/api/v1/make/event' \
 "owner": "Admin",
 "state":"CRITICAL",
 "msg":"Port 8080 down",
-"created":"2021-12-12 12:12:12"
+"created":"2021-12-12 12:12:12",
 "makecall":"true"
 }'
 ```

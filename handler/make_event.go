@@ -11,14 +11,15 @@ import (
 )
 
 type MakeEventReq struct {
-	Host    string `bson:"host" json:"host" binding:"required"`
-	Owner   string `bson:"owner" json:"owner" binding:"required"`
-	Service string `bson:"service" json:"service" binding:"required"`
-	State   string `bson:"state" json:"state" binding:"required"`
-	Status  string `bson:"status" json:"status" binding:"required"`
-	Msg     string `bson:"msg" json:"msg" binding:"required"`
-	Action  string `bson:"action" json:"action" binding:"required"`
-	Created string `bson:"created" json:"created" binding:"required"`
+	Host     string `bson:"host" json:"host" binding:"required"`
+	Owner    string `bson:"owner" json:"owner" binding:"required"`
+	Service  string `bson:"service" json:"service" binding:"required"`
+	State    string `bson:"state" json:"state" binding:"required"`
+	Status   string `bson:"status" json:"status" binding:"required"`
+	Msg      string `bson:"msg" json:"msg" binding:"required"`
+	Action   string `bson:"action" json:"action" binding:"required"`
+	Makecall string `bson:"makecall" json:"makecall" binding:"required"`
+	Created  string `bson:"created" json:"created" binding:"required"`
 }
 
 type KafkaMsg struct {
@@ -49,15 +50,16 @@ func MakeEvent(c *gin.Context) {
 
 	// Restructure logging
 	logging := models.Logging{
-		ID:      primitive.NewObjectID(),
-		Host:    requestBody.Host,
-		Owner:   requestBody.Owner,
-		Service: requestBody.Host,
-		State:   requestBody.State,
-		Status:  requestBody.Status,
-		Msg:     requestBody.Msg,
-		Action:  requestBody.Action,
-		Created: created,
+		ID:       primitive.NewObjectID(),
+		Host:     requestBody.Host,
+		Owner:    requestBody.Owner,
+		Service:  requestBody.Service,
+		State:    requestBody.State,
+		Status:   requestBody.Status,
+		Msg:      requestBody.Msg,
+		Action:   requestBody.Action,
+		Makecall: requestBody.Makecall,
+		Created:  created,
 	}
 
 	// Write to mongodb
