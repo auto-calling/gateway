@@ -53,7 +53,7 @@ func MakeEvent(c *gin.Context) {
 		ID:       primitive.NewObjectID(),
 		Host:     requestBody.Host,
 		Owner:    requestBody.Owner,
-		Service:  requestBody.Service,
+		Service:  requestBody.Host,
 		State:    requestBody.State,
 		Status:   requestBody.Status,
 		Msg:      requestBody.Msg,
@@ -61,7 +61,6 @@ func MakeEvent(c *gin.Context) {
 		Makecall: requestBody.Makecall,
 		Created:  created,
 	}
-
 	// Write to mongodb
 	idLogging, err := models.LoggingInsertOne(logging)
 	if err != nil {
